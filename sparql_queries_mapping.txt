@@ -1,0 +1,35 @@
+SPARQL queries examples to map GNDs, ULANs, and VIAFs to Wikidata entities, and Wikidata entities to GNDs, ULANs, and VIAFs available on Wikidata.
+
+
+Map GND to Wikidata:
+
+SELECT ?gnd ?wd WHERE {
+    VALUES ?gnd { "112233" "112234" }  # GND values in the format "112233"
+    ?wd wdt:P227 ?gnd.
+}
+
+
+Map ULAN to Wikidata:
+
+SELECT ?ulan ?wd WHERE {
+    VALUES ?ulan { "112233" "112234" }  # ULAN values in the format "112233"
+    ?wd wdt:P245 ?ulan.
+}
+
+
+Map VIAF to Wikidata:
+
+SELECT ?viaf ?wd WHERE {
+    VALUES ?viaf { "112233" "112234" }  # VIAF values in the format "112233"
+    ?wd wdt:P214 ?viaf.
+}
+
+
+Map Wikidata to GND, ULAN, VIAF:
+
+SELECT ?gnd ?ulan ?viaf ?wd WHERE {
+    VALUES ?wd { wd:Q42 wd:Q72 }  # Wikidata entity URIs
+    OPTIONAL { ?wd wdt:P227 ?gnd. }
+    OPTIONAL { ?wd wdt:P245 ?ulan. }
+    OPTIONAL { ?wd wdt:P214 ?viaf. }
+}
